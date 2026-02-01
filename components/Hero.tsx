@@ -46,7 +46,8 @@ export default function Hero() {
         {/* RIGHT SIDE - AVATAR */}
         <div>
           <Image
-            src="/avatar.jpg"
+            src="/assets/avatar.jpg"
+
             alt="Dhairya Mittal"
             width={220}
             height={220}
