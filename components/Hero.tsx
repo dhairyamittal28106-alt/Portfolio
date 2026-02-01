@@ -14,6 +14,16 @@ export default function Hero() {
       <p className="mt-6 max-w-xl mx-auto text-text-muted">
         {profile.tagline}
       </p>
+      <div className="mt-8 flex justify-center">
+        <a
+          href="/resume.pdf"
+          download
+          className="px-6 py-3 rounded-lg border border-white/40 hover:border-white transition"
+        >
+          Download Resume
+        </a>
+      </div>
+
     </section>
   );
 }

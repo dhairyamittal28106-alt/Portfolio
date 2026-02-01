@@ -13,3 +13,8 @@ export default function RootLayout({
     </html>
   );
 }
+export const metadata = {
+  title: "Dhairya Mittal | Software Developer",
+  description: "Backend, AI & Full Stack Developer Portfolio",
+};
+
