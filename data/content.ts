@@ -49,20 +49,21 @@ export const projects: Project[] = [
       "Real-time virtual try-on system using webcam input with pose detection, 3D body modeling, and cloth overlay.",
     tech: ["Python", "OpenCV", "MediaPipe", "NumPy"],
     image: "/assets/etryroom.png",
-    github: "#",
+    github: "https://github.com/dhairyamittal28106-alt/ETryRoom",
     live: "#",
     fit: "contain",
   },
   {
-    title: "Smart Crop Advisory System",
+    title: "Refrigerator Alchemist",
     description:
-      "Recommendation system suggesting suitable crops based on environmental inputs.",
-    tech: ["TypeScript"],
-    image: "/assets/crop.png",
-    github: "#",
-    live: "#",
-    fit: "cover",
+      "AI-powered system that recommends recipes based on available refrigerator ingredients using machine learning.",
+    image: "/assets/fridge.png",   // optional image
+    fit: "contain",
+    github: "https://github.com/dhairyamittal28106-alt/refrigerator_alchemist",
+    live: "https://drive.google.com/file/d/1BLz0SY9tFECX-nxrKojGMii3aTaLp-Tu/view?usp=drivesdk",
+    tech: ["Python", "Machine Learning", "NLP"]
   },
+
 ];
 
 
