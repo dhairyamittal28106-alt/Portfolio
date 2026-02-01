@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "./Reveal";
 
 import { Home, Github, Linkedin, Mail, Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -43,7 +44,8 @@ export default function FloatingBar() {
         px-6 py-3 rounded-full
         flex gap-6 shadow-xl
         transition-all duration-300
-       border border-white/40 hover:border-white transition
+       border border-black/30 dark:border-white/40
+
         ${visible ? "opacity-100" : "opacity-0 -translate-y-10"}
         z-[9999]
       `}

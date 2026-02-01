@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "./Reveal";
 
 import { Project } from "@/data/content";
 
