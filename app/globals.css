@@ -1,22 +1,44 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 :root {
-  --background: #ffffff;
+  --background: #E8E8E3;
   --foreground: #171717;
+  --border: #d4d4d8;
+  --border-hover: #a1a1aa;
+  --text-muted: #52525b;
+  --bg-card: #ffffff;
+  --nav-bg: #E8E8E3;
+  --nav-text: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-text-muted: var(--text-muted);
+  --color-bg-card: var(--bg-card);
+  --color-nav-bg: var(--nav-bg);
+  --color-nav-text: var(--nav-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* System preference handling moved to JS */
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.3);
+  --text-muted: #9ca3af;
+  --bg-card: transparent;
+  --nav-bg: #000000;
+  --nav-text: #ffffff;
 }
 
 body {
