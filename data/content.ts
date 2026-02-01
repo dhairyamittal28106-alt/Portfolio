@@ -1,4 +1,5 @@
 export interface Project {
+  fit: string;
   title: string;
   description: string;
   tech: string[];
@@ -50,6 +51,7 @@ export const projects: Project[] = [
     image: "/assets/etryroom.png",
     github: "#",
     live: "#",
+    fit: "contain",
   },
   {
     title: "Smart Crop Advisory System",
@@ -59,6 +61,7 @@ export const projects: Project[] = [
     image: "/assets/crop.png",
     github: "#",
     live: "#",
+    fit: "cover",
   },
 ];
 
