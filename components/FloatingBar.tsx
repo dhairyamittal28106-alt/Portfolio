@@ -1,33 +1,35 @@
 "use client";
-import Reveal from "./Reveal";
 
 import { Home, Github, Linkedin, Mail, Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function FloatingBar() {
   const [visible, setVisible] = useState(true);
-  const [lastScroll, setLastScroll] = useState(0);
   const [dark, setDark] = useState(false);
+  let scrollTimeout: NodeJS.Timeout;
 
+  // Detect system theme on first load
   useEffect(() => {
-    // Check if user prefers dark mode
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDark(true);
       document.documentElement.classList.add("dark");
+      setDark(true);
     }
   }, []);
 
-  // Hide while scrolling
+  // Hide while scrolling, show when scroll stops
   useEffect(() => {
     const handleScroll = () => {
-      const current = window.scrollY;
-      setVisible(current < lastScroll);
-      setLastScroll(current);
+      setVisible(false);
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setVisible(true);
+      }, 200); // show after 200ms of scroll stop
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScroll]);
+  }, []);
 
   // Toggle theme
   const toggleTheme = () => {
@@ -38,25 +40,45 @@ export default function FloatingBar() {
   return (
     <div
       className={`
-        fixed top-6 left-1/2 -translate-x-1/2
-        bg-white text-black
-        dark:bg-black dark:text-white
-        px-6 py-3 rounded-full
-        flex gap-6 shadow-xl
-        transition-all duration-300
-       border border-black/30 dark:border-white/40
+        fixed z-[9999]
+        left-1/2 -translate-x-1/2
+        bottom-4 md:top-6 md:bottom-auto
 
-        ${visible ? "opacity-100" : "opacity-0 -translate-y-10"}
-        z-[9999]
+        bg-white/90 dark:bg-black/80
+        backdrop-blur-lg
+        text-black dark:text-white
+
+        border border-black/30 dark:border-white/40
+        rounded-full
+        px-6 py-3
+
+        flex gap-6
+        shadow-xl
+
+        transition-all duration-300 ease-in-out
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
       `}
     >
-      <a href="#"><Home size={18} /></a>
-      <a href="https://github.com/dhairyamittal28106-alt" target="_blank">
+      <a href="#">
+        <Home size={18} />
+      </a>
+
+      <a
+        href="https://github.com/dhairyamittal28106-alt"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Github size={18} />
       </a>
-      <a href="https://linkedin.com/in/dhairyamittal" target="_blank">
+
+      <a
+        href="https://linkedin.com/in/dhairyamittal"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Linkedin size={18} />
       </a>
+
       <a href="mailto:dhairyamittal28106@gmail.com">
         <Mail size={18} />
       </a>
