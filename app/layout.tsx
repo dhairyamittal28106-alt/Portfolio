@@ -1,4 +1,5 @@
 import "./globals.css";
+import { AuroraBackground } from "@/components/AuroraBackground";
 
 export default function RootLayout({
   children,
@@ -6,10 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-white text-black dark:bg-black dark:text-white transition-colors">
-
-        {children}
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="bg-background text-foreground antialiased selection:bg-cyan-500/30">
+        <AuroraBackground>
+          {children}
+        </AuroraBackground>
       </body>
     </html>
   );

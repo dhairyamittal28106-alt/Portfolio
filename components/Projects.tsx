@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { projects, Project } from "@/data/content";
 import ProjectModal from "./ProjectModal";
@@ -37,23 +38,40 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20">
-      <Reveal>
-        <h2 className="text-3xl font-bold mb-10 text-center">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold mb-10 text-center text-neutral-900 dark:text-white"
+        >
           Check out my latest work
-        </h2>
+        </motion.h2>
 
         {/* MANUAL PROJECTS */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+          }}
+          className="grid md:grid-cols-2 gap-8 mb-16"
+        >
           {projects.map((p, i) => (
-            <div
+            <motion.div
               key={i}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 }
+              }}
               onClick={() => setSelected(p)}
-              className="cursor-pointer group border border-black/30 dark:border-white/40 rounded-xl overflow-hidden
-                         hover:border-black dark:hover:border-white
-                         hover:-translate-y-1
-                         hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]
-                         dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]
-                         transition duration-300"
+              className="cursor-pointer group relative rounded-xl overflow-hidden backdrop-blur-sm
+                         border-[1.5px] border-amber-500/30 dark:border-blue-500/30 bg-white/40 dark:bg-white/5
+                         hover:border-amber-500/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
+                         transition-all duration-500 ease-out
+                         hover:-translate-y-2"
             >
               {p.image && (
                 <div className="w-full h-64 overflow-hidden bg-black">
@@ -61,58 +79,75 @@ export default function Projects() {
                     src={p.image}
                     alt={p.title}
                     className={`w-full h-full ${p.fit === "contain"
-                        ? "object-contain"
-                        : "object-cover"
-                      }`}
+                      ? "object-contain"
+                      : "object-cover"
+                      } transform group-hover:scale-105 transition-transform duration-700`}
                   />
                 </div>
               )}
 
               <div className="p-5">
-                <h3 className="font-semibold text-lg">
+                <h3 className="font-semibold text-lg text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {p.title}
                 </h3>
-                <p className="text-gray-400 text-sm mt-2">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-2">
                   {p.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* GITHUB PROJECTS */}
-        <h3 className="text-2xl font-bold mb-6 text-center">
+        <motion.h3
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="text-2xl font-bold mb-6 text-center text-neutral-900 dark:text-white"
+        >
           More Projects on GitHub
-        </h3>
+        </motion.h3>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          className="grid md:grid-cols-2 gap-8"
+        >
           {githubRepos.map((repo) => (
-            <a
+            <motion.a
               key={repo.id}
               href={repo.html_url}
               target="_blank"
-              className="border border-black/30 dark:border-white/40 rounded-xl p-6
-                         hover:border-black dark:hover:border-white
-                         hover:-translate-y-1
-                         hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]
-                         dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]
-                         transition duration-300"
+              variants={{
+                hidden: { opacity: 0, scale: 0.9 },
+                visible: { opacity: 1, scale: 1 }
+              }}
+              className="relative p-6 rounded-xl overflow-hidden backdrop-blur-sm
+                         border-[1.5px] border-amber-500/30 dark:border-purple-500/30 bg-white/40 dark:bg-white/5
+                         hover:border-amber-500/50 dark:hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] dark:hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]
+                         transition-all duration-500 ease-out
+                         hover:-translate-y-2 group"
             >
-              <h4 className="font-semibold text-lg">
+              <h4 className="font-semibold text-lg text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {repo.name}
               </h4>
 
-              <p className="text-gray-400 text-sm mt-2">
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-2">
                 {repo.description || "No description provided."}
               </p>
 
-              <div className="mt-4 text-sm opacity-70">
+              <div className="mt-4 text-sm text-neutral-500">
                 ⭐ {repo.stargazers_count} • 🍴 {repo.forks_count}
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
-      </Reveal>
+        </motion.div>
+      </div>
 
       <ProjectModal
         project={selected}

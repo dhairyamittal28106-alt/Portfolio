@@ -1,43 +1,59 @@
+"use client";
+
 import { profile } from "@/data/content";
-import Reveal from "./Reveal";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
     <section id="contact" className="py-24 text-center">
-      <Reveal>
-        <h2 className="text-3xl font-bold mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-3xl font-bold mb-6 text-neutral-900 dark:text-white">
           Let’s Build Something 🕵️
         </h2>
 
-        <p className="text-text-muted mb-10">
+        <p className="text-neutral-600 dark:text-neutral-400 mb-10 text-xl">
           Open to internships, freelance work, and collaborations.
         </p>
 
-        <div className="flex justify-center gap-6">
-          <a
+        <div className="flex flex-wrap justify-center gap-6">
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href={`mailto:${profile.email}`}
-            className="px-6 py-3 rounded-lg bg-foreground text-background font-medium hover:shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition"
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold 
+                       hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all duration-300"
           >
             Email Me
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href={profile.github}
             target="_blank"
-            className="px-6 py-3 rounded-lg border border-black/30 dark:border-white/40 hover:border-black dark:hover:border-white hover:shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition"
+            className="px-8 py-3 rounded-full border-[1.5px] border-amber-500/30 dark:border-blue-500/30 text-neutral-900 dark:text-white font-medium 
+                       hover:bg-amber-500/5 dark:hover:bg-blue-500/10 hover:border-amber-500/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)] dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300"
           >
             GitHub
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href={profile.linkedin}
             target="_blank"
-            className="px-6 py-3 rounded-lg border border-black/30 dark:border-white/40 hover:border-black dark:hover:border-white hover:shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition"
+            className="px-8 py-3 rounded-full border-[1.5px] border-amber-500/30 dark:border-blue-500/30 text-neutral-900 dark:text-white font-medium 
+                       hover:bg-amber-500/5 dark:hover:bg-blue-500/10 hover:border-amber-500/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)] dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300"
           >
             LinkedIn
-          </a>
+          </motion.a>
         </div>
-      </Reveal>
+      </motion.div>
     </section>
   );
 }

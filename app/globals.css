@@ -1,48 +1,101 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@variant dark (&:where(.dark, .dark *));
 
 
 :root {
-  --background: #E8E8E3;
-  --foreground: #171717;
-  --border: #d4d4d8;
-  --border-hover: #a1a1aa;
-  --text-muted: #52525b;
-  --bg-card: #ffffff;
-  --nav-bg: #E8E8E3;
-  --nav-text: #171717;
-}
+  /* Light Theme (Default) */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: #737373;
+  --accent: #f4f4f5;
+  --accent-foreground: #0a0a0a;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #0a0a0a;
+  --radius: 0.5rem;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-border: var(--border);
-  --color-border-hover: var(--border-hover);
-  --color-text-muted: var(--text-muted);
-  --color-bg-card: var(--bg-card);
-  --color-nav-bg: var(--nav-bg);
-  --color-nav-text: var(--nav-text);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Custom Sarvam-like colors */
+  --aurora-1: #3b82f6;
+  --aurora-2: #8b5cf6;
+  --aurora-3: #ec4899;
 }
-
-/* System preference handling moved to JS */
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --border: rgba(255, 255, 255, 0.1);
-  --border-hover: rgba(255, 255, 255, 0.3);
-  --text-muted: #9ca3af;
-  --bg-card: transparent;
-  --nav-bg: #000000;
-  --nav-text: #ffffff;
+  /* Dark Theme */
+  --background: #050505;
+  --foreground: #fafafa;
+  --card: #121212;
+  --card-foreground: #fafafa;
+  --popover: #121212;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #121212;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #d4d4d8;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Custom Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #fff, #a5a5a5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Robotic/Tech Scanline Effect (subtle) */
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 50;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: -10%;
+  }
+
+  100% {
+    top: 110%;
+  }
 }
