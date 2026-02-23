@@ -51,6 +51,9 @@ export default function Experience() {
               <li>Zennovatio 3.0 – GenZ Hackathon</li>
               <li>Google AdMob App Development Challenge (IIT Bombay)</li>
               <li>Code Slayers 2K25 – NIT Delhi</li>
+              <li>Microsoft Learn Student Ambassador Makeathon 8 – Thapar University, Patiala (24hr Hackathon)</li>
+              <li>Technex IIT BHU Pre-Zonal Hackathon – Rank 4, Selected in Top 37 out of 350+ Teams</li>
+              <li>Vibe with Singularity – GGSIPU, Delhi (24hr Hackathon)</li>
             </ul>
           </motion.div>
 
