@@ -4,32 +4,26 @@ import Link from "next/link";
 import { Github, Linkedin, Mail, Sun, Moon, Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { profile } from "@/data/content";
 
 export default function Navbar() {
   const [dark, setDark] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Detect system theme on first load
   useEffect(() => {
     document.documentElement.classList.add("dark");
-    setDark(true);
   }, []);
 
-  // Toggle theme
   const toggleTheme = () => {
-    if (dark) {
-      document.documentElement.classList.remove("dark");
-      setDark(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      setDark(true);
-    }
+    const nextDark = !dark;
+    document.documentElement.classList.toggle("dark", nextDark);
+    setDark(nextDark);
   };
 
   const socialLinks = [
-    { icon: Github, link: "https://github.com/dhairyamittal28106-alt" },
-    { icon: Linkedin, link: "https://linkedin.com/in/dhairyamittal" },
-    { icon: Mail, link: "mailto:dhairyamittal28106@gmail.com" },
+    { icon: Github, link: profile.github, label: "GitHub" },
+    { icon: Linkedin, link: profile.linkedin, label: "LinkedIn" },
+    { icon: Mail, link: `mailto:${profile.email}`, label: "Email" },
   ];
 
   const navLinks = [
@@ -41,109 +35,127 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full h-32 z-[9998] pointer-events-none bg-gradient-to-b from-orange-100 via-white/80 to-transparent dark:from-black dark:via-black/90 dark:to-transparent" />
+      <div className="pointer-events-none fixed left-0 top-0 z-[9998] h-32 w-full bg-gradient-to-b from-white via-white/85 to-transparent dark:from-[#030712] dark:via-[#030712]/90 dark:to-transparent" />
 
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] w-[95%] md:w-[90%] max-w-5xl rounded-full border-[1.5px] border-amber-500/60 dark:border-blue-500/50 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg shadow-amber-500/20 dark:shadow-blue-500/20 transition-all duration-300">
-        <div className="px-4 md:px-6 py-3 flex justify-between items-center">
-          <Link href="#" className="font-extrabold text-lg text-black dark:text-white tracking-tight z-50">
-            Dhairya Mittal
+      <nav className="fixed left-1/2 top-3 z-[9999] w-[calc(100%-1rem)] max-w-6xl -translate-x-1/2 rounded-full border border-black/5 bg-white/70 shadow-[0_16px_60px_rgba(15,23,42,0.08)] backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#030712]/78 dark:shadow-none sm:top-5 sm:w-[95%]">
+        <div className="flex items-center justify-between px-3 py-2.5 md:px-5 md:py-3">
+          <Link
+            href="#"
+            className="inline-flex items-center gap-3 rounded-full border border-black/5 bg-white/75 px-3 py-2 text-sm font-semibold tracking-tight text-neutral-950 shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:shadow-none"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-950 text-xs font-bold text-white dark:bg-white dark:text-neutral-950">
+              DM
+            </span>
+            <span className="hidden sm:inline">{profile.name}</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-6 text-sm font-bold text-black dark:text-neutral-400">
+          <div className="hidden items-center gap-2 rounded-full border border-black/5 bg-white/65 px-3 py-2 text-sm font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 md:flex">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="hover:text-amber-600 dark:hover:text-blue-500 transition-colors">
+              <Link
+                key={link.name}
+                href={link.href}
+                className="rounded-full px-3 py-1.5 transition-colors hover:bg-black/[0.04] hover:text-red-600 dark:hover:bg-white/8 dark:hover:text-sky-300"
+              >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-1 md:gap-2 border-r border-neutral-300 dark:border-white/10 pr-3 mr-1">
-              {socialLinks.map((item, index) => (
+          <div className="hidden items-center gap-2 md:flex">
+            <div className="flex items-center gap-1 rounded-full border border-black/5 bg-white/65 p-1 dark:border-white/10 dark:bg-white/[0.04]">
+              {socialLinks.map((item) => (
                 <a
-                  key={index}
+                  key={item.label}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full text-black dark:text-neutral-400 hover:text-amber-600 dark:hover:text-blue-500 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+                  className="rounded-full p-2 text-neutral-600 transition-colors hover:bg-black/5 hover:text-red-600 dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-sky-300"
+                  aria-label={item.label}
                 >
-                  <item.icon size={18} />
+                  <item.icon size={17} />
                 </a>
               ))}
-              <a
-                href="/resume.pdf"
-                download="Dhairya_Mittal_Resume.pdf"
-                className="p-2 rounded-full text-black dark:text-neutral-400 hover:text-amber-600 dark:hover:text-blue-500 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
-                aria-label="Download Resume"
-              >
-                <Download size={18} />
-              </a>
             </div>
+
+            <a
+              href="/resume.pdf"
+              download="Dhairya_Mittal_Resume.pdf"
+              className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
+            >
+              <Download size={16} />
+              Resume
+            </a>
 
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-black dark:text-neutral-400 hover:text-amber-600 dark:hover:text-blue-500 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              className="rounded-full border border-black/5 bg-white/70 p-2.5 text-neutral-600 transition-colors hover:bg-black/5 hover:text-red-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-sky-300"
+              aria-label="Toggle theme"
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-black dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              className="rounded-full border border-black/5 bg-white/70 p-2.5 text-neutral-700 transition-colors hover:bg-black/5 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/10"
+              aria-label="Toggle theme"
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-black dark:text-white z-50"
+              className="z-50 rounded-full border border-black/5 bg-white/70 p-2.5 text-neutral-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-white"
+              aria-label="Toggle menu"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-white dark:bg-black border border-amber-500/30 dark:border-blue-500/30 rounded-3xl mt-2 p-6 flex flex-col items-center gap-6 shadow-xl md:hidden overflow-hidden"
+              exit={{ opacity: 0, y: -16 }}
+              className="absolute left-0 top-full mt-3 w-full overflow-hidden rounded-[2rem] border border-black/5 bg-white/95 p-5 shadow-[0_16px_60px_rgba(15,23,42,0.12)] md:hidden dark:border-white/10 dark:bg-[#050b16]/95 sm:p-6"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-bold text-black dark:text-neutral-300 hover:text-amber-600 dark:hover:text-blue-500"
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex gap-4 mt-2 border-t border-neutral-200 dark:border-white/10 pt-6 w-full justify-center">
-                {socialLinks.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-neutral-100 dark:bg-white/10 rounded-full text-black dark:text-white"
+              <div className="flex flex-col items-center gap-5">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-base font-medium text-neutral-900 dark:text-neutral-100"
                   >
-                    <item.icon size={20} />
-                  </a>
+                    {link.name}
+                  </Link>
                 ))}
+
                 <a
                   href="/resume.pdf"
                   download="Dhairya_Mittal_Resume.pdf"
-                  className="p-3 bg-neutral-100 dark:bg-white/10 rounded-full text-black dark:text-white"
+                  className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-semibold text-white dark:bg-white dark:text-neutral-950"
                 >
-                  <Download size={20} />
+                  <Download size={16} />
+                  Download Resume
                 </a>
+
+                <div className="flex gap-3 border-t border-black/5 pt-5 dark:border-white/10">
+                  {socialLinks.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-neutral-100 p-3 text-neutral-800 dark:bg-white/10 dark:text-white"
+                      aria-label={item.label}
+                    >
+                      <item.icon size={18} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}

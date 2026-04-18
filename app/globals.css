@@ -27,9 +27,9 @@
   --radius: 0.5rem;
 
   /* Custom Sarvam-like colors */
-  --aurora-1: #3b82f6;
-  --aurora-2: #8b5cf6;
-  --aurora-3: #ec4899;
+  --aurora-1: #f97316;
+  --aurora-2: #f87171;
+  --aurora-3: #fda4af;
 }
 
 .dark {
@@ -61,6 +61,134 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  background-image:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.1), transparent 22%),
+    radial-gradient(circle at top right, rgba(248, 113, 113, 0.048), transparent 18%),
+    radial-gradient(circle at 50% 12%, rgba(253, 164, 175, 0.042), transparent 20%),
+    linear-gradient(180deg, rgba(255, 247, 242, 0.9), rgba(255, 255, 255, 1));
+}
+
+@keyframes auroraDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.04);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes ambientPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes cardSheen {
+  0% {
+    transform: translateX(-120%) skewX(-14deg);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.42;
+  }
+
+  40%,
+  100% {
+    transform: translateX(220%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
+.aurora-drift {
+  animation: auroraDrift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.ambient-pulse {
+  animation: ambientPulse 8s ease-in-out infinite;
+}
+
+.float-soft {
+  animation: softFloat 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto -20% -30%;
+  width: 36%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(249, 115, 22, 0.08),
+    rgba(248, 113, 113, 0.06),
+    transparent
+  );
+  opacity: 0;
+  animation: cardSheen 8.5s ease-in-out infinite;
+}
+
+.dark .card-sheen::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 189, 248, 0.12),
+    rgba(59, 130, 246, 0.08),
+    transparent
+  );
+}
+
+.hover-lift {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-drift,
+  .ambient-pulse,
+  .float-soft,
+  .card-sheen::after {
+    animation: none !important;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
 }
 
 /* Custom Utilities */

@@ -2,66 +2,53 @@
 
 import { skills } from "@/data/content";
 import { motion } from "framer-motion";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.8 },
-  visible: { opacity: 1, y: 0, scale: 1 },
-};
+import { Layers3 } from "lucide-react";
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-bold mb-8 text-neutral-900 dark:text-white text-center"
-        >
-          Skills
-        </motion.h2>
-
+    <section id="skills" className="py-24">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-wrap gap-3 justify-center"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.5 }}
+          className="card-sheen rounded-[2rem] border border-black/5 bg-white/80 p-8 shadow-[0_18px_70px_rgba(15,23,42,0.07)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none md:p-10"
         >
-          {skills.map((skill) => (
-            <motion.span
-              key={skill}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="
-                cursor-default
-                px-5 py-2
-                bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-white
-                rounded-full
-                text-sm
-                font-medium
-                border-[1.5px] border-amber-500/30 dark:border-blue-500/30
-                hover:border-amber-500/50 dark:hover:border-blue-500/50
-                hover:bg-amber-500/5 dark:hover:bg-blue-500/10
-                hover:shadow-[0_0_15px_rgba(245,158,11,0.3)] dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]
-                transition-colors duration-300
-              "
-            >
-              {skill}
-            </motion.span>
-          ))}
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-[linear-gradient(135deg,rgba(249,115,22,0.12),rgba(239,68,68,0.08))] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange-700 dark:border-sky-500/20 dark:bg-sky-500/10 dark:text-sky-300">
+                <Layers3 className="h-3.5 w-3.5" />
+                Skills
+              </div>
+              <h2 className="mt-5 text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white md:text-5xl">
+                A stack shaped around backend, cloud, and applied AI work.
+              </h2>
+            </div>
+
+            <div className="max-w-xl rounded-[2rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,244,239,0.92))] px-5 py-4 shadow-[0_12px_32px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] dark:shadow-none">
+              <p className="text-sm leading-7 text-neutral-600 dark:text-neutral-400 md:text-base">
+                Tools and technologies I use to build production-ready systems and
+                practical developer workflows.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-3">
+            {skills.map((skill, index) => (
+              <motion.span
+                key={skill}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.02 }}
+                whileHover={{ y: -2 }}
+                className="hover-lift rounded-full border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,244,239,0.96))] px-4 py-2.5 text-sm font-medium text-neutral-700 shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition-all duration-300 hover:border-red-500/30 hover:text-red-600 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] dark:text-neutral-300 dark:shadow-none dark:hover:border-sky-400/30 dark:hover:text-sky-300"
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
