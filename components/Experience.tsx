@@ -24,8 +24,8 @@ const blocks = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="experience" className="py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function Experience() {
             <Trophy className="h-3.5 w-3.5" />
             Experience
           </div>
-          <h2 className="mt-5 text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white md:text-5xl">
+          <h2 className="mt-5 text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-3xl md:text-5xl">
             Competitive work, learning, and achievements that sharpen execution.
           </h2>
         </motion.div>
@@ -50,7 +50,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-120px" }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="card-sheen hover-lift rounded-[1.8rem] border border-black/5 bg-white/80 p-7 shadow-[0_18px_70px_rgba(15,23,42,0.08)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none"
+              className="card-sheen hover-lift rounded-[1.5rem] border border-black/5 bg-white/80 p-5 shadow-[0_18px_70px_rgba(15,23,42,0.08)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none sm:rounded-[1.8rem] sm:p-7"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-black/5 bg-black/5 text-red-600 dark:border-white/10 dark:bg-white/5 dark:text-sky-300">
                 <block.icon className="h-5 w-5" />

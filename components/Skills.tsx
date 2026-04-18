@@ -6,14 +6,14 @@ import { Layers3 } from "lucide-react";
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="skills" className="py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-120px" }}
           transition={{ duration: 0.5 }}
-          className="card-sheen rounded-[2rem] border border-black/5 bg-white/80 p-8 shadow-[0_18px_70px_rgba(15,23,42,0.07)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none md:p-10"
+          className="card-sheen rounded-[1.75rem] border border-black/5 bg-white/80 p-6 shadow-[0_18px_70px_rgba(15,23,42,0.07)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none sm:rounded-[2rem] sm:p-8 md:p-10"
         >
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
@@ -21,12 +21,12 @@ export default function Skills() {
                 <Layers3 className="h-3.5 w-3.5" />
                 Skills
               </div>
-              <h2 className="mt-5 text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white md:text-5xl">
+              <h2 className="mt-5 text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-3xl md:text-5xl">
                 A stack shaped around backend, cloud, and applied AI work.
               </h2>
             </div>
 
-            <div className="max-w-xl rounded-[2rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,244,239,0.92))] px-5 py-4 shadow-[0_12px_32px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] dark:shadow-none">
+            <div className="max-w-xl rounded-[1.5rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,244,239,0.92))] px-4 py-4 shadow-[0_12px_32px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] dark:shadow-none sm:rounded-[2rem] sm:px-5">
               <p className="text-sm leading-7 text-neutral-600 dark:text-neutral-400 md:text-base">
                 Tools and technologies I use to build production-ready systems and
                 practical developer workflows.
