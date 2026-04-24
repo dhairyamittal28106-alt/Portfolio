@@ -4,7 +4,6 @@
 
 
 :root {
-  /* Light Theme (Default) */
   --background: #ffffff;
   --foreground: #0a0a0a;
   --card: #ffffff;
@@ -25,15 +24,12 @@
   --input: #e4e4e7;
   --ring: #0a0a0a;
   --radius: 0.5rem;
-
-  /* Custom Sarvam-like colors */
   --aurora-1: #f97316;
   --aurora-2: #f87171;
   --aurora-3: #fda4af;
 }
 
 .dark {
-  /* Dark Theme */
   --background: #050505;
   --foreground: #fafafa;
   --card: #121212;
@@ -191,7 +187,6 @@ body {
   }
 }
 
-/* Custom Utilities */
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
@@ -204,7 +199,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Robotic/Tech Scanline Effect (subtle) */
 .scanline {
   position: fixed;
   top: 0;

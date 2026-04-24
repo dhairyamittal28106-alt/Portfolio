@@ -29,7 +29,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+          className="max-w-3xl"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-[linear-gradient(135deg,rgba(249,115,22,0.12),rgba(248,113,113,0.048))] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-orange-700 dark:border-sky-500/20 dark:bg-sky-500/10 dark:text-sky-300">
             Available for work

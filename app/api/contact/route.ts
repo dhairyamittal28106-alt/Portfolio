@@ -12,6 +12,10 @@ function normalizeField(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function badRequest(error: string) {
+  return NextResponse.json({ error }, { status: 400 });
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as Partial<ContactSubmissionInput>;
@@ -24,48 +28,33 @@ export async function POST(request: Request) {
     };
 
     if (!payload.name) {
-      return NextResponse.json(
-        { error: "Please enter your name." },
-        { status: 400 }
-      );
+      return badRequest("Please enter your name.");
     }
 
     if (!isValidEmail(payload.email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address." },
-        { status: 400 }
-      );
+      return badRequest("Please enter a valid email address.");
     }
 
     if (!payload.message) {
-      return NextResponse.json(
-        { error: "Please enter your message." },
-        { status: 400 }
-      );
+      return badRequest("Please enter your message.");
     }
 
     await saveContactSubmission(payload);
 
     return NextResponse.json(
-      {
-        message:
-          "Thanks for reaching out. Your message has been sent successfully.",
-      },
+      { message: "Thanks for reaching out. Your message has been sent successfully." },
       { status: 201 }
     );
   } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : "Unable to save your message.";
-
+    const errorMessage = error instanceof Error ? error.message : "";
     const isConfigurationError = errorMessage.includes("MONGODB_URI");
+    const message = isConfigurationError
+      ? "Contact storage is not configured yet. Add MongoDB env vars to enable it."
+      : "Something went wrong while saving your message.";
 
     return NextResponse.json(
-      {
-        error: isConfigurationError
-          ? "Contact storage is not configured yet. Add MongoDB env vars to enable it."
-          : "Something went wrong while saving your message.",
-      },
-      { status: isConfigurationError ? 500 : 500 }
+      { error: message },
+      { status: 500 }
     );
   }
 }

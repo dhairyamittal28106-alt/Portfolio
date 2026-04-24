@@ -52,11 +52,17 @@ const initialFormState: FormState = {
   message: "",
 };
 
+const defaultErrorMessage = "Unable to send message right now.";
+
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState("");
+
+  const updateField = (field: keyof FormState, value: string) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -76,19 +82,13 @@ export default function Contact() {
       const data = (await response.json()) as { error?: string; message?: string };
 
       if (!response.ok) {
-        throw new Error(data.error || "Unable to send message right now.");
+        throw new Error(data.error || defaultErrorMessage);
       }
 
-      setSubmitSuccess(
-        data.message || "Your message has been sent successfully."
-      );
+      setSubmitSuccess(data.message || "Your message has been sent successfully.");
       setForm(initialFormState);
     } catch (error) {
-      setSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send message right now."
-      );
+      setSubmitError(error instanceof Error ? error.message : defaultErrorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -178,12 +178,7 @@ export default function Contact() {
                     <input
                       required
                       value={form.name}
-                      onChange={(event) =>
-                        setForm((current) => ({
-                          ...current,
-                          name: event.target.value,
-                        }))
-                      }
+                      onChange={(event) => updateField("name", event.target.value)}
                       placeholder="Your name"
                       className="mt-2 w-full rounded-2xl border border-black/10 bg-white/90 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-orange-400 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-sky-400"
                     />
@@ -197,12 +192,7 @@ export default function Contact() {
                       required
                       type="email"
                       value={form.email}
-                      onChange={(event) =>
-                        setForm((current) => ({
-                          ...current,
-                          email: event.target.value,
-                        }))
-                      }
+                      onChange={(event) => updateField("email", event.target.value)}
                       placeholder="name@example.com"
                       className="mt-2 w-full rounded-2xl border border-black/10 bg-white/90 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-orange-400 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-sky-400"
                     />
@@ -216,12 +206,7 @@ export default function Contact() {
                     </span>
                     <input
                       value={form.company}
-                      onChange={(event) =>
-                        setForm((current) => ({
-                          ...current,
-                          company: event.target.value,
-                        }))
-                      }
+                      onChange={(event) => updateField("company", event.target.value)}
                       placeholder="Startup, team, or opportunity"
                       className="mt-2 w-full rounded-2xl border border-black/10 bg-white/90 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-orange-400 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-sky-400"
                     />
@@ -237,12 +222,7 @@ export default function Contact() {
                       required
                       rows={5}
                       value={form.message}
-                      onChange={(event) =>
-                        setForm((current) => ({
-                          ...current,
-                          message: event.target.value,
-                        }))
-                      }
+                      onChange={(event) => updateField("message", event.target.value)}
                       placeholder="Tell me a bit about your project, role, or collaboration idea."
                       className="mt-2 w-full rounded-3xl border border-black/10 bg-white/90 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-orange-400 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-sky-400"
                     />

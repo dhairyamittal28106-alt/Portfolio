@@ -10,6 +10,17 @@ type CountApiResponse = {
   value: number | string;
 };
 
+async function readCount(endpoint: string) {
+  const response = await fetch(endpoint, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch visitor count");
+  }
+
+  const data = (await response.json()) as CountApiResponse;
+  return Number(data.value);
+}
+
 export default function VisitorCount() {
   const [count, setCount] = useState<number | null>(null);
   const [hasError, setHasError] = useState(false);
@@ -20,45 +31,24 @@ export default function VisitorCount() {
     const fetchCount = async () => {
       try {
         const hasCounted = sessionStorage.getItem(SESSION_STORAGE_KEY) === "true";
-        const endpoint = hasCounted
-          ? `https://countapi.mileshilliard.com/api/v1/get/${COUNT_API_KEY}`
-          : `https://countapi.mileshilliard.com/api/v1/hit/${COUNT_API_KEY}`;
+        const getUrl = `https://countapi.mileshilliard.com/api/v1/get/${COUNT_API_KEY}`;
+        const hitUrl = `https://countapi.mileshilliard.com/api/v1/hit/${COUNT_API_KEY}`;
+        let nextCount: number;
 
-        const response = await fetch(endpoint, { cache: "no-store" });
-
-        if (!response.ok && hasCounted) {
-          const retryResponse = await fetch(
-            `https://countapi.mileshilliard.com/api/v1/hit/${COUNT_API_KEY}`,
-            { cache: "no-store" }
-          );
-
-          if (!retryResponse.ok) {
-            throw new Error("Failed to fetch visitor count");
+        if (hasCounted) {
+          try {
+            nextCount = await readCount(getUrl);
+          } catch {
+            nextCount = await readCount(hitUrl);
+            sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
           }
-
-          const retryData = (await retryResponse.json()) as CountApiResponse;
-
-          sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
-
-          if (isMounted) {
-            setCount(Number(retryData.value));
-          }
-
-          return;
-        }
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch visitor count");
-        }
-
-        const data = (await response.json()) as CountApiResponse;
-
-        if (!hasCounted) {
+        } else {
+          nextCount = await readCount(hitUrl);
           sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
         }
 
         if (isMounted) {
-          setCount(Number(data.value));
+          setCount(nextCount);
           setHasError(false);
         }
       } catch {
