@@ -23,9 +23,9 @@ export async function POST(request: Request) {
       message: normalizeField(body.message),
     };
 
-    if (payload.name.length < 2) {
+    if (!payload.name) {
       return NextResponse.json(
-        { error: "Please enter your full name." },
+        { error: "Please enter your name." },
         { status: 400 }
       );
     }
@@ -37,9 +37,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (payload.message.length < 20) {
+    if (!payload.message) {
       return NextResponse.json(
-        { error: "Please share at least a few details in your message." },
+        { error: "Please enter your message." },
         { status: 400 }
       );
     }
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "Thanks for reaching out. Your message has been saved successfully.",
+          "Thanks for reaching out. Your message has been sent successfully.",
       },
       { status: 201 }
     );
