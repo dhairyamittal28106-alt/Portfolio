@@ -1,5 +1,6 @@
 import "./globals.css";
 import { AuroraBackground } from "@/components/AuroraBackground";
+import { Analytics } from '@vercel/analytics/next';
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
         <AuroraBackground>
           {children}
         </AuroraBackground>
+        <Analytics />
       </body>
     </html>
   );
