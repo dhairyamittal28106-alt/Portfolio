@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dhairya Mittal — Portfolio
 
-## Getting Started
+A personal portfolio built with Next.js, React, TypeScript, Tailwind CSS, and Framer Motion. The home page presents an introduction, about section, projects, skills, experience, and contact form, with animated backgrounds and project details.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Requirements: Node.js and npm.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    npm install
+    npm run dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open `http://localhost:3000`. Use `npm run build` to create a production build, `npm start` to serve it, and `npm run lint` to run ESLint.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact storage
 
-## Learn More
+The contact API can use MongoDB. Copy `.env.example` to `.env.local` and configure `MONGODB_URI` and `MONGODB_DB` if you want to enable database-backed submissions. Do not commit real credentials.
 
-To learn more about Next.js, take a look at the following resources:
+## Content and assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `data/content.ts`: portfolio copy and project data
+- `components/`: page sections and reusable UI
+- `app/api/contact/`: contact submission endpoint
+- `public/`: project images, resume, and other static assets
