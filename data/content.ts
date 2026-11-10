@@ -128,11 +128,29 @@ export const education = [
 ];
 
 export const achievements = [
+  "Finalist — Trackshift 2.0; 11th place among 3,600 teams across India. Organized by Haas F1 (London) at Plaksha University, Mohali.",
   "Finalist - Code With Singularity",
   "Finalist - TechNex '26",
   "Finalist - i-Hack (Google AdMob App Development Challenge), IIT Bombay",
   "Participant - Makeathon 8, Thapar Institute of Engineering and Technology",
   "Participant - Zennovatio 3.0, Chandigarh University",
+];
+
+export const experience = [
+  {
+    organization: "CDAC Mohali",
+    role: "AI & Cybersecurity Intern",
+    period: "1st June – 15th July, 2026",
+    description: "Internship focused on applied AI and cybersecurity.",
+    type: "Internship",
+  },
+  {
+    organization: "E-Summit 2027 · IIT Roorkee",
+    role: "Campus Ambassador",
+    period: "November 2026 – Present",
+    description: "Representing E-Summit 2027 and connecting the campus community with the event.",
+    type: "Campus role",
+  },
 ];
 
 export const certifications = [

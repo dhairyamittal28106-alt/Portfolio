@@ -1,5 +1,6 @@
 import "./globals.css";
-import { AuroraBackground } from "@/components/AuroraBackground";
+import "./portfolio.css";
+import BootIntro from "@/components/BootIntro";
 
 export default function RootLayout({
   children,
@@ -7,17 +8,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="bg-background text-foreground antialiased selection:bg-cyan-500/30">
-        <AuroraBackground>
-          {children}
-        </AuroraBackground>
-      </body>
+    <html lang="en">
+      <body className="antialiased"><BootIntro />{children}</body>
     </html>
   );
 }
 export const metadata = {
-  title: "Dhairya Mittal | Software Developer",
-  description: "Backend, AI & Full Stack Developer Portfolio",
+  title: "Dhairya Mittal — Developer & Builder",
+  description: "Portfolio of Dhairya Mittal, a computer science undergraduate building backend systems, cloud applications, and useful AI products.",
 };
 
