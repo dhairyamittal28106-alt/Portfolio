@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin, Terminal, Cpu,
 import { achievements, certifications, education, experience, profile, projects, skills } from "@/data/content";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const featured = projects.slice(0, 4);
+const featured = projects.slice(0, 2);
 
 export default function Home() {
   return (
